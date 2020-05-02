@@ -11,6 +11,7 @@
     <div class="input-form">
       <div>
         <input
+          v-model="inputName"
           type="text"
           name="inputName"
           class="input-name"
@@ -18,7 +19,8 @@
         />
       </div>
       <div>
-        <textarea
+        <textarea 
+          v-model="inputText"
           name="inputText"
           class="input-text"
           placeholder="テキスト"
@@ -27,7 +29,7 @@
         ></textarea>
       </div>
       <div>
-        <button>送信</button>
+        <button v-on:click="onSubmit">送信</button>
       </div>
     </div>
   </div>
@@ -58,8 +60,10 @@ export default {
   methods: {
     onSubmit() {
       this.messages.push({
-        name: this.inputName
+        name: this.inputName,
+        text: this.inputText
       });
+      this.inputText = "";
     }
   }
 }
