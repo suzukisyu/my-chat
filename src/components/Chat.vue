@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'Chat',
   data: () => {
@@ -53,24 +55,30 @@ export default {
     }
   },
   mounted() {
-    this.messages = [
-      {
-        name: "太郎",
-        text: '元気ですか？'
-      },
-      {
-        name: "次郎",
-        text: '元気です'
-      }
-    ];
+    this.messages = []
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(() => {
+      const ref_message = firebase.database().ref('messages')
+      ref_message.limitToLast(10).on('child_added', this.added)
+    })
   },
   methods: {
     onSubmit() {
-      this.messages.push({
+      // firebase にメッセージを追加
+      firebase.database().ref('messages').push({
         name: this.inputName,
         text: this.inputText
-      });
-      this.inputText = "";
+      }, () => {
+        this.inputText = ""
+      })
+    },
+    added(snap) {
+      const message = snap.val()
+      this.messages.push({
+        name: message.name,
+        text: message.text
+      })
     }
   }
 }
