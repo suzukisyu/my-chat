@@ -1,5 +1,6 @@
 <template>
   <div class="background">
+    
     <div v-for="(message, key) in messages" v-bind:key="key">
       <div class=" name">
         {{ message.name }}
@@ -8,7 +9,10 @@
         {{ message.text }}
       </div>
     </div>
+   
+    
     <div class=" input-form">
+      
       <div>
         <input
           v-model="inputName"
@@ -18,6 +22,7 @@
           placeholder="名前"
         />
       </div>
+      
       <div>
         <textarea 
           v-model="inputText"
@@ -28,9 +33,11 @@
           cols="30"
         ></textarea>
       </div>
+      
       <div>
         <button class="button" v-on:click="onSubmit">送信</button>
       </div>
+   
     </div>
   </div>
 </template>
@@ -100,11 +107,12 @@ export default {
 
 .input-name {
   width: 100px;
+  display: inline-block;
   padding: 0.5em 1em;
   text-decoration: none;
   background: #f7f7f7;
   border-left: solid 6px #87cefa;
-  color: #87cefa;
+  color:gray;
   font-weight: bold;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }
@@ -112,12 +120,12 @@ export default {
 .input-text{
    margin-top: 5px;
    width: 300px;
- 
+  display: inline-block;
   padding: 0.5em 1em;
   text-decoration: none;
   background: #f7f7f7;
   border-left: solid 6px #98fb98;
-  color: #98fb98;
+  color:gray;
   font-weight: bold;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
 }
@@ -142,8 +150,7 @@ export default {
 .background{
   padding: 10px; 
   margin-bottom: 10px; 
-  border: 5px 
-  double #333333
+  border: 5px double #333333
 }
 
 
