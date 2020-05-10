@@ -65,13 +65,19 @@ export default {
   },
   methods: {
     onSubmit() {
-      // firebase にメッセージを追加
-      firebase.database().ref('messages').push({
-        name: this.inputName,
-        text: this.inputText
-      }, () => {
-        this.inputText = ""
-      })
+      if(this.inputName == ""){
+        alert("送信出来ません");
+      }else if(this.inputText == ""){
+        alert("送信できません")
+      }else{
+        // firebase にメッセージを追加
+        firebase.database().ref('messages').push({
+          name: this.inputName,
+          text: this.inputText
+        }, () => {
+          this.inputText = ""
+        })
+      }
     },
     added(snap) {
       const message = snap.val()
