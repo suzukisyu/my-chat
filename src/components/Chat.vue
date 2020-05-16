@@ -36,7 +36,10 @@
       
       <div>
         <button class="button" v-on:click="onSubmit">送信</button>
+        <button v-on:click="onDelete">削除</button>
       </div>
+      
+      
    
     </div>
   </div>
@@ -65,7 +68,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      if(this.inputText == "バカ"){
+      if(this.inputText.indexOf("バカ") > -1){
          alert("悪口は送信出来ません");
       }else if(this.inputName == ""){
         alert("送信出来ません");
@@ -88,6 +91,21 @@ export default {
         name: message.name,
         text: message.text
       })
+      this.$nextTick(() => {
+        const elementHtml = document.documentElement;
+        const bottom = elementHtml.scrollHeight - elementHtml.clientHeight;
+        window.scroll(0, bottom);
+      })
+
+    },
+    onDelete(){
+      const ret = confirm("すべてのメッセージを削除しますか？")
+      
+      if(ret){
+        firebase.database().ref('messages').remove(() => {
+          this.messages = []
+        })
+      }
     }
   }
 }
@@ -108,10 +126,9 @@ export default {
 
 .text {
   margin-top: 5px;
-  text-indent: 2em;
+  padding:10px;
   background:#98fb98;
-  width: 200px;
-  height:30px;
+  width: 300px;
   border-radius: 50px;
   
 }
@@ -136,7 +153,7 @@ export default {
 
 .input-text{
    margin-top: 5px;
-   width: 300px;
+   width:300px;
   display: inline-block;
   padding: 0.5em 1em;
   text-decoration: none;
