@@ -65,7 +65,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      if(this.inputName == ""){
+      if(this.inputText == "バカ"){
+         alert("悪口は送信出来ません");
+      }else if(this.inputName == ""){
         alert("送信出来ません");
       }else if(this.inputText == ""){
         alert("送信できません")
@@ -77,6 +79,7 @@ export default {
         }, () => {
           this.inputText = ""
         })
+        
       }
     },
     added(snap) {
