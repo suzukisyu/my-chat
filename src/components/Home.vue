@@ -1,6 +1,7 @@
 <template>
   <div>
-    ホーム
+    ホーム<br/>
+    <router-link to="/chat">チャット</router-link><br/>
   </div>
 </template>
 
