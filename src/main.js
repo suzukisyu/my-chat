@@ -1,6 +1,9 @@
 import Vue from 'vue'
+import Router from 'vue-router'
 import App from './App.vue'
 import firebase from 'firebase'
+import Chat from './components/Chat.vue'
+import Home from './components/Home.vue'
 
 Vue.config.productionTip = false
 
@@ -15,6 +18,24 @@ const firebaseConfig = {
 }
 firebase.initializeApp(firebaseConfig)
 
+Vue.use(Router)
+const router = new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: Chat
+    }
+  ]
+})
+
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')
