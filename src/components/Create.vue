@@ -1,6 +1,7 @@
 <template>
   <div>
-    チャットルーム作成
+    チャットルーム作成<br/>
+    <router-link to="/">戻る</router-link><br/>
   </div>
 </template>
 

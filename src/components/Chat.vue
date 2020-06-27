@@ -1,5 +1,6 @@
 <template>
   <div class="background">
+    <router-link to="/">戻る</router-link><br/>
     
     <div v-for="(message, key) in messages" v-bind:key="key">
       <div class=" name">
