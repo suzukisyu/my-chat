@@ -3,7 +3,10 @@ import Router from 'vue-router'
 import App from './App.vue'
 import firebase from 'firebase'
 import Chat from './components/Chat.vue'
-import Home from './components/Home.vue'
+import List from './components/List.vue'
+import Login from './components/Login.vue'
+import SignUp from './components/SignUp.vue'
+import Create from './components/Create.vue'
 
 Vue.config.productionTip = false
 
@@ -24,8 +27,23 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'list',
+      component: List
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: Create
     },
     {
       path: '/chat',
