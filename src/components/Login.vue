@@ -1,13 +1,13 @@
 <template>
   <div>
-    ホーム<br/>
-    <router-link to="/chat">チャット</router-link><br/>
+    ログイン<br/>
+    <router-link to="/signup">ユーザー登録</router-link><br/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Login',
   data: () => {
     return {
     }
