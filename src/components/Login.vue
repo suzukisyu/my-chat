@@ -1,7 +1,21 @@
 <template>
   <div>
     ログイン<br/>
-    <router-link to="/">ログイン</router-link><br/>
+    <br>
+    ユーザー名
+    <input
+    type="text"
+    >
+    <br/>
+    パスワード
+    <input
+    type="text"
+    >
+    <br>
+    <button class="button">ログイン</button>
+    
+    <br>
+    <br>
     <router-link to="/signup">ユーザー登録</router-link><br/>
   </div>
 </template>
@@ -23,4 +37,8 @@ export default {
 </script>
 
 <style scoped>
+.button{
+  background-color: green;
+  
+}
 </style>
