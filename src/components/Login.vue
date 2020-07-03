@@ -8,12 +8,12 @@
     >
     <br>
     <br>
-    <br>
     
     パスワード
     <input
     type="text"
     >
+    <br>
     <br>
     <button class="button">ログイン</button>
     
