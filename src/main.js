@@ -33,12 +33,18 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        isPublic: true
+      }
     },
     {
       path: '/signup',
       name: 'signup',
-      component: SignUp
+      component: SignUp,
+      meta: {
+        isPublic: true
+      }
     },
     {
       path: '/create',
@@ -51,6 +57,15 @@ const router = new Router({
       component: Chat
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const login = localStorage.getItem('login');
+  if (to.matched.some(page => page.meta.isPublic) || login == 1) {
+    next()
+  } else {
+    next('/login')
+  }
 })
 
 new Vue({
