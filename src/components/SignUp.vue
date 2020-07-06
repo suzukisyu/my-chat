@@ -21,13 +21,23 @@ export default {
   },
   methods: {
     async regist() {
-      await this.registUser('test', 'password');
+      if (await this.existsUser(this.userName)) {
+        return
+      }
+      await this.registUser(this.userName, this.password);
+      localStorage.setItem('login', this.userName)
+      await this.$router.push('/')
     },
     async registUser(userName, password) {
       firebase.auth()
       await firebase.database().ref('/users/' + userName).set({
         password: password
       });
+    },
+    async existsUser(userName) {
+      firebase.auth()
+      const user = await firebase.database().ref('/users/' + userName).once('value')
+      return !!user.val()
     }
   }
 }
