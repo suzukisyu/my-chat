@@ -60,8 +60,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const login = localStorage.getItem('login');
-  if (to.matched.some(page => page.meta.isPublic) || login == 1) {
+  const loginUser = localStorage.getItem('login');
+  if (to.matched.some(page => page.meta.isPublic) || loginUser) {
     next()
   } else {
     next('/login')

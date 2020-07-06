@@ -36,7 +36,7 @@ export default {
     }
   },
   mounted() {
-    localStorage.setItem('login', 0)
+    localStorage.setItem('login', false)
   },
   created() {
   },
@@ -51,7 +51,7 @@ export default {
         return
       }
       if (await this.checkUser(this.userName, this.password)) {
-        localStorage.setItem('login', 1)
+        localStorage.setItem('login', this.userName)
         await this.$router.push('/')
       } else {
         this.message = 'ログインに失敗しました'
