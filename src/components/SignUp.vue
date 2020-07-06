@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'SignUp',
   data: () => {
@@ -18,6 +20,15 @@ export default {
   created() {
   },
   methods: {
+    async regist() {
+      await this.registUser('test', 'password');
+    },
+    async registUser(userName, password) {
+      firebase.auth()
+      await firebase.database().ref('/users/' + userName).set({
+        password: password
+      });
+    }
   }
 }
 </script>

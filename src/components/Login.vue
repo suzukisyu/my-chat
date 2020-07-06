@@ -3,16 +3,17 @@
     <div class="content">
       <h1 class="title">my-chat ログイン</h1>
       <div class="body">
+        <div class="message">{{message}}</div>
         <div class="input-group">
           <div class="input-name">ユーザー名</div>
-          <input class="input" type="text"/>
+          <input class="input" type="text" v-model="userName"/>
         </div>
         <div class="input-group">
           <div class="input-name">パスワード</div>
-          <input class="input" type="passowrd"/>
+          <input class="input" type="password" v-model="password"/>
         </div>
         <div class="button-group">
-          <button class="button">ログイン</button>
+          <button class="button" v-on:click="login">ログイン</button>
         </div>
         <div class="signup-group">
           <router-link to="/signup">ユーザー登録</router-link>
@@ -23,17 +24,47 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'Login',
   data: () => {
     return {
+      userName: '',
+      password: '',
+      message: ''
     }
   },
   mounted() {
+    localStorage.setItem('login', 0)
   },
   created() {
   },
   methods: {
+    async login() {
+      if (this.userName == '') {
+        this.message = 'ユーザー名を入れてください'
+        return
+      }
+      if (this.password == '') {
+        this.message = 'パスワードを入れてください'
+        return
+      }
+      if (await this.checkUser(this.userName, this.password)) {
+        localStorage.setItem('login', 1)
+        await this.$router.push('/')
+      } else {
+        this.message = 'ログインに失敗しました'
+      }
+    },
+    async checkUser(userName, password) {
+      firebase.auth()
+      const user = await firebase.database().ref('/users/' + userName).once('value')
+      if (!user.val()) {
+        return false
+      }
+      return password == user.val().password;
+    }
   }
 }
 </script>
@@ -79,5 +110,8 @@ export default {
   width: 100%;
   text-align: center;
   margin-top: 10px;
+}
+.message {
+  color: red;
 }
 </style>
