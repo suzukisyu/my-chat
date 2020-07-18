@@ -3,27 +3,35 @@
     <h1 class="title">my-chat チャットルーム作成</h1><br/>
     <div class="box">    
         <div>
-          チャットルーム名<input type="text" class="room">
+          チャットルーム名
+          <input 
+            v-model="name"
+            type="text"
+            class="room"
+          />
         </div>  
     
         <div>
           
-          <button class="button">作成</button>
+          <button class="button" v-on:click="create">作成</button>
           
         </div>
         
         <br>
         <br>
-        <router-link to="/"class="back">戻る</router-link><br/>
+        <router-link to="/" class="back">戻る</router-link><br/>
     </div>    
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'Create',
   data: () => {
     return {
+      name: ''
     }
   },
   mounted() {
@@ -31,6 +39,13 @@ export default {
   created() {
   },
   methods: {
+    create() {
+      firebase.database().ref('chats').push({
+        name: this.name
+      }, () => {
+        this.$router.push('/')
+      })
+    }
   }
 }
 </script>

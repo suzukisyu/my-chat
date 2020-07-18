@@ -5,11 +5,19 @@
       
     <div class="box1">
         
-      <h3 class="title2">my-chat　ホーム</h3>
+      <h3 class="title2">my-chat ホーム</h3>
       <router-link to="/create" class="sinki">新規作成</router-link><br/>
       <br>
-      <router-link to="/chat" class="chat">チャットルーム</router-link><br/>
-      <br>
+      
+      <table>
+        <tr>
+          <th>チャットルーム名</th>
+        </tr>
+        <tr v-for="chat in chats">
+          <td>{{chat.name}}</td>
+        </tr>
+      </table>
+      
       <router-link to="/login" class="log">ログアウト</router-link>
       <br/>
       
@@ -19,17 +27,29 @@
   </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'List',
   data: () => {
     return {
+      chats: []
     }
   },
   mounted() {
   },
-  created() {
+  async created() {
+    firebase.auth()
+    await firebase.database().ref('/chats').on('child_added', this.added)
   },
   methods: {
+    added(snap) {
+      const chat = snap.val()
+      this.chats.push({
+        key: snap.key,
+        name: chat.name,
+      })
+    }
   }
 }
 </script>
