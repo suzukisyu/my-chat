@@ -13,7 +13,7 @@
         <tr>
           <th>チャットルーム名</th>
         </tr>
-        <tr v-for="chat in chats">
+        <tr class="list"v-for="chat in chats">
           <td>{{chat.name}}</td>
         </tr>
       </table>
@@ -92,13 +92,22 @@ export default {
   
   .log{
    
-   padding: 0.5em 1em;
+    padding: 0.5em 1em;
     margin: 2em 0;
     font-weight: bold;
     border: solid 1px #000000;
     right: 100%;
   }
   
+  .list{
+  border: solid 1px #000000;
+  color: black;
+  text-decoration: none;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  cursor: pointer;
+  }
 
 </style>
 

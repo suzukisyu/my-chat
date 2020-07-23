@@ -40,6 +40,9 @@ export default {
   },
   methods: {
     create() {
+      if(this.name == ""){
+        alert("空欄は作成できません")
+      }
       firebase.database().ref('chats').push({
         name: this.name
       }, () => {
